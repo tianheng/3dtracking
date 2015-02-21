@@ -1,0 +1,301 @@
+data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -data and gyro data
+-20.00   15.00   16414.00   14   17   19   
+Acc data and gyro data
+-3.00   -
