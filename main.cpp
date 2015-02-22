@@ -5,10 +5,47 @@
 #include <iostream>
 #include <random>
 #include "tracking.h"
+#include <fcntl.h>
+#include <termios.h>
+#include <unistd.h>
+
 using namespace std;
 
 
-
+int open_port()
+{
+  cout <<"open usb...."<<endl;
+  int fd = open(USB_PORT, O_RDWR | O_NOCTTY | O_NDELAY);
+  if (fd<0)
+    cout << "usb doens't work"<<endl;
+  struct termios tty;
+  cout <<"usb connected, setting usb port."<<endl;
+  memset (&tty, 0, sizeof tty);
+  tcgetattr(fd, &tty);
+  cfsetospeed (&tty, B115200);
+  cfsetispeed (&tty, B115200);
+  
+  // disable IGNBRK for mismatched speed tests; otherwise receive break
+  // as \000 chars
+  tty.c_iflag &= ~IGNBRK;         // disable break processing
+  tty.c_lflag = 0;                // no signaling chars, no echo,
+                                        // no canonical processing
+  tty.c_oflag = 0;                // no remapping, no delays
+  tty.c_cc[VMIN]  = 0;            // read doesn't block
+  tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+  
+  tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
+  
+  tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
+  // enable reading
+  tty.c_cflag |= PARENB;
+  tty.c_cflag |= PARODD;
+  tty.c_cflag |= CSTOPB;
+  tty.c_cflag &= ~CSIZE;
+  tty.c_cflag |= CS7;
+  tcsetattr(fd, TCSANOW, &tty);
+  return fd;
+}
 //print info text to screen
 void output_info(string info, int x, int y, string input_string)
 {
@@ -78,6 +115,10 @@ void display(void)
 	/*  don't wait!
 	*  start processing buffered OpenGL routines
 	*/
+	char buff[100];
+	int n =read(fd, buff, sizeof buff);
+	for (int i=0;i<n;i++)
+	  cout <<buff[i];
 	output_info("Current camera position:\n", 0, 500, to_string(cx).substr(0,6) + "," + to_string(cy).substr(0,6) + "," + to_string(cz).substr(0,6));
 	output_info("Node added:\n", -900, 900, data_buff[0] + data_buff[1] + data_buff[2] + data_buff[3] + data_buff[4]);
 	glutSwapBuffers();
@@ -88,7 +129,7 @@ void processspace(unsigned char key, int xx, int yy)
 {
 	double fraction = 0.1f;
 
-	//random generate lines.
+	//random generate lines, merely for test purpose.
 	if (key == ' ')
 	{
 		node* temp = new node;
@@ -174,6 +215,7 @@ int main(int argc, char** argv)
 	start.z = 0.0f;
 	start.next = NULL;
 	tail = START;
+	fd=open_port();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(1000, 1000);
@@ -181,7 +223,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("ece445-3D drawing");
 	init();
 	glutDisplayFunc(display);
-	glutKeyboardFunc(processspace);
+	//glutKeyboardFunc(processspace);
 	//glutIdleFunc(display);
 	glutTimerFunc(1000 / 30, runMainLoop, 0);
 	glEnable(GL_DEPTH_TEST);
