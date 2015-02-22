@@ -1,16 +1,10 @@
-// opengl_test.cpp : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
-#include <windows.h>
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <GLUT/glut.h>
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
 #include <iostream>
 #include <random>
-#include "opengl_test.h"
+#include "tracking.h"
 using namespace std;
 
 

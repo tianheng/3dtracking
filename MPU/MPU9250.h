@@ -80,7 +80,7 @@ void calibrateMPU9250(float * dest1, float * dest2)
   
 // Configure MPU9250 gyro and accelerometer for bias calculation
   writeByte(MPU9250_ADDRESS, CONFIG, 0x01);      // Set low-pass filter to 188 Hz
-  writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x00);  // Set sample rate to 1 kHz
+  writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x09);  // Set sample rate to 1 kHz
   writeByte(MPU9250_ADDRESS, GYRO_CONFIG, 0x00);  // Set gyro full-scale to 250 degrees per second, maximum sensitivity
   writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, 0x00); // Set accelerometer full-scale to 2 g, maximum sensitivity
  
@@ -248,47 +248,20 @@ void readGyroData(int16_t * destination){
   destination[2] = (int16_t)(((int16_t)rawData[4] << 8) | rawData[5]) ; 
 }
 
-void sampleFIFO(int16_t sample, int16_t *dest) {
+uint16_t sampleFIFO(uint8_t *dest) {
   uint8_t data[12]; // data array to hold accelerometer and gyro x, y, z, data
-  uint16_t ii, packet_count, fifo_count;
-  int32_t gyro_bias[3] = {0, 0, 0}, accel_bias[3] = {0, 0, 0};
-  
-  writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);      // Disable FIFO
-  writeByte(MPU9250_ADDRESS, USER_CTRL, 0x00);    // Disable FIFO
-  writeByte(MPU9250_ADDRESS, USER_CTRL, 0x04);   // Reset FIFO
-  writeByte(MPU9250_ADDRESS, USER_CTRL, 0x40);    // Enable FIFO
-  writeByte(MPU9250_ADDRESS, FIFO_EN, 0x78);     // Enable gyro and accelerometer sensors for FIFO (max size 512 bytes in MPU-9250)
-  delay(sample); 
-// At end of sample accumulation, turn off FIFO sensor read
-  writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);        // Disable gyro and accelerometer sensors for FIFO
+  uint16_t i,fifo_count;
   readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data[0]); // read FIFO sample count
   fifo_count = ((uint16_t)data[0] << 8) | data[1];
-  if (fifo_count<sample) sample = fifo_count;
-  packet_count = sample/12;
-  for (ii = 0; ii < packet_count; ii++) {
-    int16_t accel_temp[3] = {0, 0, 0}, gyro_temp[3] = {0, 0, 0};
-    readBytes(MPU9250_ADDRESS, FIFO_R_W, 12, &data[0]); // read data for averaging
-    accel_temp[0] = (int16_t) (((int16_t)data[0] << 8) | data[1]  ) ;  // Form signed 16-bit integer for each sample in FIFO
-    accel_temp[1] = (int16_t) (((int16_t)data[2] << 8) | data[3]  ) ;
-    accel_temp[2] = (int16_t) (((int16_t)data[4] << 8) | data[5]  ) ;    
-    gyro_temp[0]  = (int16_t) (((int16_t)data[6] << 8) | data[7]  ) ;
-    gyro_temp[1]  = (int16_t) (((int16_t)data[8] << 8) | data[9]  ) ;
-    gyro_temp[2]  = (int16_t) (((int16_t)data[10] << 8) | data[11]) ;
-    
-    accel_bias[0] += (int32_t) accel_temp[0]; // Sum individual signed 16-bit biases to get accumulated signed 32-bit biases
-    accel_bias[1] += (int32_t) accel_temp[1];
-    accel_bias[2] += (int32_t) accel_temp[2];
-    gyro_bias[0]  += (int32_t) gyro_temp[0];
-    gyro_bias[1]  += (int32_t) gyro_temp[1];
-    gyro_bias[2]  += (int32_t) gyro_temp[2];
-  }
-    
-  dest[0] = accel_bias[0] / (int32_t) packet_count; // Normalize sums to get average count biases
-  dest[1] = accel_bias[1] / (int32_t) packet_count;
-  dest[2] = accel_bias[2] / (int32_t) packet_count;
-  dest[3] = gyro_bias[0]  / (int32_t) packet_count;
-  dest[4] = gyro_bias[1]  / (int32_t) packet_count;
-  dest[5] = gyro_bias[2]  / (int32_t) packet_count;
+  //Serial.println(fifo_count);
+  //readBytes(MPU9250_ADDRESS, FIFO_R_W, fifo_count, dest); // read data for averaging
+  uint8_t flag=readByte(MPU9250_ADDRESS, INT_STATUS);
+  flag=flag & 0x10;
+  if (flag!=0) 
+    Serial.println("Buffer overflow.");
+  for (i=0;i<fifo_count;i++)
+    dest[i]=readByte(MPU9250_ADDRESS, FIFO_R_W);
+  return fifo_count;
 }
     
   
