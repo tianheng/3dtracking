@@ -112,13 +112,14 @@ void display(void)
 		glVertex3f(0.0f, 0.0f, 1000.0f);
 	glEnd();
 
+	//read usb content. 
+	char temp_buff[1024];
+	int n =read(fd, temp_buff, sizeof temp_buff);
+	string buff(temp_buff);
+	parse_data(buff,n);
 	/*  don't wait!
 	*  start processing buffered OpenGL routines
 	*/
-	char buff[100];
-	int n =read(fd, buff, sizeof buff);
-	for (int i=0;i<n;i++)
-	  cout <<buff[i];
 	output_info("Current camera position:\n", 0, 500, to_string(cx).substr(0,6) + "," + to_string(cy).substr(0,6) + "," + to_string(cz).substr(0,6));
 	output_info("Node added:\n", -900, 900, data_buff[0] + data_buff[1] + data_buff[2] + data_buff[3] + data_buff[4]);
 	glutSwapBuffers();
@@ -130,7 +131,7 @@ void processspace(unsigned char key, int xx, int yy)
 	double fraction = 0.1f;
 
 	//random generate lines, merely for test purpose.
-	if (key == ' ')
+	/*if (key == ' ')
 	{
 		node* temp = new node;
 		temp->x = rand() % 50 - 25;
@@ -144,7 +145,7 @@ void processspace(unsigned char key, int xx, int yy)
 		for (int i = 0; i < 4; i++)
 			data_buff[i] = data_buff[i + 1];
 		data_buff[4] = to_string(temp->x) + "," + to_string(temp->y) + "," + to_string(temp->z) + "\n";
-	}
+		}*/
 
 	//change view
 	switch (key) {
@@ -223,7 +224,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("ece445-3D drawing");
 	init();
 	glutDisplayFunc(display);
-	//glutKeyboardFunc(processspace);
+	glutKeyboardFunc(processspace);
 	//glutIdleFunc(display);
 	glutTimerFunc(1000 / 30, runMainLoop, 0);
 	glEnable(GL_DEPTH_TEST);
