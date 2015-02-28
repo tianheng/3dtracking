@@ -95,9 +95,9 @@ void loop()
     case 11:
       gyro_z=(int16_t)((int16_t)gyro_z<<8) | dest[i];
       String temp_str;
-      temp_str=temp_str+String(accel_x)+" ";
-      temp_str=temp_str+String(accel_y)+" ";
-      temp_str=temp_str+String(accel_z)+" ";
+      temp_str=temp_str+String(-accel_x)+" ";
+      temp_str=temp_str+String(-accel_y)+" ";
+      temp_str=temp_str+String(-accel_z)+" ";
       temp_str=temp_str+String(gyro_x)+" ";
       temp_str=temp_str+String(gyro_y)+" ";
       temp_str=temp_str+String(gyro_z)+" \n";

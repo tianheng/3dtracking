@@ -44,6 +44,8 @@ int open_port()
   tty.c_cflag &= ~CSIZE;
   tty.c_cflag |= CS7;
   tcsetattr(fd, TCSANOW, &tty);
+  char temp_buff[4096];
+  int n =read(fd, temp_buff, sizeof temp_buff);
   return fd;
 }
 //print info text to screen
@@ -80,9 +82,9 @@ void display(void)
 		double x = 0.0f, y = 0.0f, z = 0.0f;
    		while (curr != NULL)
 		{
-			x += curr->x;
-			y += curr->y;
-			z += curr->z;
+			x += curr->y;
+			y += curr->z;
+			z += curr->x;
 			glVertex3f(x,y,z);
 			curr = curr->next;
 		}
@@ -113,8 +115,13 @@ void display(void)
 	glEnd();
 
 	//read usb content. 
-	char temp_buff[1024];
+	char temp_buff[4096];
 	int n =read(fd, temp_buff, sizeof temp_buff);
+	if (!flag_start)
+	  {
+	    n=read(fd,temp_buff, sizeof temp_buff);
+	    flag_start=true;
+	  }
 	string buff(temp_buff);
 	parse_data(buff,n);
 	/*  don't wait!
@@ -122,6 +129,7 @@ void display(void)
 	*/
 	output_info("Current camera position:\n", 0, 500, to_string(cx).substr(0,6) + "," + to_string(cy).substr(0,6) + "," + to_string(cz).substr(0,6));
 	output_info("Node added:\n", -900, 900, data_buff[0] + data_buff[1] + data_buff[2] + data_buff[3] + data_buff[4]);
+	output_info("Current angle:\n",-900,500, to_string(angle[0]).substr(0,5) + "," + to_string(angle[1]).substr(0,5) + "," + to_string(angle[2]).substr(0,5));
 	glutSwapBuffers();
 }
 
