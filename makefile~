@@ -11,8 +11,5 @@ LIBRARIES = -lGL -lGLU -lm -lobjc -lstdc++
 OBJECTS = main.o 
 All: main
 
-main: main.o $(OBJECTS) 
+3dtracking: main.o $(OBJECTS) 
 	$(CC) $(FRAMEWORK) $(CFLAGS) -o $@ $(LIBPATH) $(OBJECTS) $(LIBRARIES)
-
-clean: 
-	$(RM) main main.o

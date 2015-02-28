@@ -1,0 +1,18 @@
+import time
+import sys
+
+fo=open("data.txt","r")
+content=[]
+speed=[]
+content=fo.readlines()
+for each_line in content:
+    if "***" in each_line:
+        flag=0
+    else: 
+        flag+=1
+    if flag==4:
+        speed.append(float(each_line))
+
+prev_angle=0
+for each_num in speed:
+    

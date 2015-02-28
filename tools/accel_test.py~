@@ -1,0 +1,23 @@
+import time
+import sys
+
+fo=open("data.txt","r")
+content=[]
+speed=[]
+angle=[]
+flag=0
+content=fo.readlines()
+for each_line in content:
+    if "***" in each_line:
+        flag=0
+    else:
+        flag+=1
+    if flag==1:
+        speed.append(float(each_line))
+
+
+total_distance=0.00
+for each_num in speed:
+    total_distance+=0.50*each_num*(1.00/100.00)*(1.00/100.00)/2.00*9.81/32768.00
+
+print total_distance

@@ -10,7 +10,7 @@ void setup()
   Wire.begin();
   Serial.begin(115200);
   resetMPU9250();
-  Serial.println("MPU9250 reseted"); 
+  //Serial.println("MPU9250 reseted"); 
   calibrateMPU9250(caliGyro, caliAcc);
   // Configure range
   writeByte(MPU9250_ADDRESS,GYRO_CONFIG,GYRO_FULL_SCALE_250_DPS);
@@ -19,7 +19,7 @@ void setup()
 
   // Request first magnetometer single measurement
 //  I2CwriteByte(MAG_ADDRESS,0x0A,0x01);
-  Serial.println("Acc cali in main");
+  /*Serial.println("Acc cali in main");
   for (i=0; i<3; i++){
     Serial.print(caliAcc[i]);
     Serial.print("   "); 
@@ -30,8 +30,8 @@ void setup()
     Serial.print(caliGyro[i]);
     Serial.print("   ");
   }  
-  Serial.print("\n");
-  
+  Serial.print("**************************\n");
+  */
   //enable FIFO
   writeByte(MPU9250_ADDRESS, USER_CTRL, 0x04);   // Reset FIFO
   writeByte(MPU9250_ADDRESS, USER_CTRL, 0x40);    // Enable FIFO
@@ -94,14 +94,14 @@ void loop()
       break;
     case 11:
       gyro_z=(int16_t)((int16_t)gyro_z<<8) | dest[i];
-      Serial.println("***************");
-      Serial.println(accel_x);
-      Serial.println(accel_y);
-      Serial.println(accel_z);
-      Serial.println(gyro_x);
-      Serial.println(gyro_y);
-      Serial.println(gyro_z);
-      Serial.println("***************");
+      String temp_str;
+      temp_str=temp_str+String(accel_x)+" ";
+      temp_str=temp_str+String(accel_y)+" ";
+      temp_str=temp_str+String(accel_z)+" ";
+      temp_str=temp_str+String(gyro_x)+" ";
+      temp_str=temp_str+String(gyro_y)+" ";
+      temp_str=temp_str+String(gyro_z)+" \n";
+      Serial.print(temp_str);
       break;    
     }
     count=(count+1)%12;

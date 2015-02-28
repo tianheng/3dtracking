@@ -97,11 +97,11 @@ void calibrateMPU9250(float * dest1, float * dest2)
   readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data[0]); // read FIFO sample count
   fifo_count = ((uint16_t)data[0] << 8) | data[1];
   packet_count = fifo_count/12;// How many sets of full gyro and accelerometer data for averaging
-  Serial.print(fifo_count);
+  /*Serial.print(fifo_count);
   Serial.print("fifo_count \n");
   Serial.print(packet_count);
   Serial.print("packet_count\n");
-
+*/
   for (ii = 0; ii < packet_count; ii++) {
     int16_t accel_temp[3] = {0, 0, 0}, gyro_temp[3] = {0, 0, 0};
     readBytes(MPU9250_ADDRESS, FIFO_R_W, 12, &data[0]); // read data for averaging
@@ -129,7 +129,7 @@ void calibrateMPU9250(float * dest1, float * dest2)
     gyro_bias[1]  /= (int32_t) packet_count;
     gyro_bias[2]  /= (int32_t) packet_count;
  
- Serial.println("Acc cali");
+/* Serial.println("Acc cali");
   int i=0;
   for (i=0; i<3; i++){
     Serial.print(accel_bias[i]);
@@ -143,7 +143,7 @@ void calibrateMPU9250(float * dest1, float * dest2)
     Serial.print("   ");
   }  
   Serial.print("\n");  
- 
+ */
 // Construct the gyro biases for push to the hardware gyro bias registers, which are reset to zero upon device startup
   data[0] = (-gyro_bias[0]/4  >> 8); // Divide by 4 to get 32.9 LSB per deg/s to conform to expected bias input format
   data[1] = (-gyro_bias[0]/4)      ; // Biases are additive, so change sign on calculated average gyro biases
@@ -180,13 +180,13 @@ void calibrateMPU9250(float * dest1, float * dest2)
   readBytes(MPU9250_ADDRESS, ZA_OFFSET_H, 2, &data[0]);
   accel_bias_reg[2] = ((int16_t) ((int16_t)data[0] << 8) | data[1]) >> 1;
   
-  Serial.println("Acc factory");
+ /* Serial.println("Acc factory");
   for (i=0; i<3; i++){
     Serial.print(accel_bias_reg[i]);
     Serial.print("   ");
   }  
   Serial.print("\n");  
-
+*/
   // Construct total accelerometer bias, including calculated average accelerometer bias from above
   accel_bias_reg[0] = (accel_bias_reg[0] - (accel_bias[0]/8)) << 1; // Subtract calculated averaged accelerometer bias scaled to 2048 LSB/g (16 g full scale)
   accel_bias_reg[1] = (accel_bias_reg[0] - (accel_bias[0]/8)) << 1;

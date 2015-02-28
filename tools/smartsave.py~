@@ -1,6 +1,6 @@
 import time
 import serial
-
+import sys
 ser = serial.Serial(
     port='/dev/cu.usbmodem1411',
     baudrate=9600,
@@ -12,13 +12,16 @@ ser = serial.Serial(
 
 ser.isOpen()
 out = ''
-flag=100
-fo=open("data.txt","wb")
+flag=3000
+fo=open("data.txt","w")
+out=''
 while flag:
+    out_temp=''
     while ser.inWaiting()>0:
-        out+=ser.read(1)
-    if out!='':
-        print out
-        fo.write(out)
-    flag-=1
+        out_temp=ser.read(1)
+        out+=out_temp
+    if out_temp!='':
+        #print out_temp,
+        flag-=1
+fo.write(out)
 fo.close()
