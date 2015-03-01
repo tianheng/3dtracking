@@ -49,7 +49,14 @@ int16_t accel_z=0;
 int16_t gyro_x=0;
 int16_t gyro_y=0;
 int16_t gyro_z=0;
+long accel_x_offset=0;
+long accel_y_offset=0;
+long accel_z_offset=0;
+long gyro_x_offset=0;
+long gyro_y_offset=0;
+long gyro_z_offset=0;
 
+int offset_count=0;
 // Main loop, read and display data
 void loop()
 {  
@@ -93,15 +100,33 @@ void loop()
       gyro_z=dest[i];
       break;
     case 11:
-      gyro_z=(int16_t)((int16_t)gyro_z<<8) | dest[i];
-      String temp_str;
-      temp_str=temp_str+String(-accel_x)+" ";
-      temp_str=temp_str+String(-accel_y)+" ";
-      temp_str=temp_str+String(-accel_z)+" ";
-      temp_str=temp_str+String(gyro_x)+" ";
-      temp_str=temp_str+String(gyro_y)+" ";
-      temp_str=temp_str+String(gyro_z)+" \n";
-      Serial.print(temp_str);
+      if (offset_count<1000)
+      {
+        accel_x_offset+=(long)accel_x;
+        accel_y_offset+=(long)accel_y;
+        accel_z_offset+=(long)accel_z;
+        gyro_x_offset+=(long)gyro_x;
+        gyro_y_offset+=(long)gyro_y;
+        gyro_z_offset+=(long)gyro_z;
+        offset_count++;
+        /*String temp_str;
+        temp_str=temp_str+String(accel_x_offset)+" \n";
+        Serial.print(temp_str);
+        if (offset_count==999)
+          Serial.print("*************\n"+String(accel_x_offset)+"\n**************\n");*/
+      }
+      else
+      {
+        gyro_z=(int16_t)((int16_t)gyro_z<<8) | dest[i];
+        String temp_str;
+        temp_str=temp_str+String(accel_x-accel_x_offset/1000)+" ";
+        temp_str=temp_str+String(accel_y-accel_y_offset/1000)+" ";
+        temp_str=temp_str+String(accel_z-accel_z_offset/1000)+" ";
+        temp_str=temp_str+String(gyro_x-gyro_x_offset/1000)+" ";
+        temp_str=temp_str+String(gyro_y-gyro_y_offset/1000)+" ";
+        temp_str=temp_str+String(gyro_z-gyro_z_offset/1000)+" \n";
+        Serial.print(temp_str);
+      }
       break;    
     }
     count=(count+1)%12;
