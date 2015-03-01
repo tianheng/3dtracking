@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 
+//const parameters
 #define USB_PORT "/dev/tty.usbmodem1421" 
 #define START &start
 #define FREQ 100.00
@@ -11,10 +12,14 @@ struct node{
 	double x, y, z;
 	node* next;
 };
+//linked list start and end
 node* tail;
 node start;
+
+// helper function to calculate position
 void track_position(int data[], node* temp);
 double quick_normal(double q[]);
+
 //current camera position.
 double cx = 400.0f, cy = 400.0f, cz = 400.0f;
 double lx = 0.0f, lz = 0.0f, ly = 0.0f;
@@ -44,20 +49,26 @@ bool flag_start=false;
 //read usb data and then calculate position.
 void parse_data(string & buff,int n)
 {
+  //shitty design to fix usb shitty design
   buff=prev_buff+buff;
   n+=prev_buff.size();
   prev_buff="";
   string tmp_num="";
   int count=0;
   int data[6];
+  //sample time interval
   double t=1.00/FREQ;
+
+  //loop data and parse value
   for (int i=0;i<n;i++)
     {
       switch (buff[i])
 	{
 	case '\n':
 	  {
+	    //build new node and calculate position
 	    node* temp = new node;
+	    //get current angle
 	    angle[0]+=((double)data[3])*t*250.00/32768.00;
 	    angle[1]+=((double)data[4])*t*250.00/32768.00;
 	    angle[2]+=((double)data[5])*t*250.00/32768.00;
@@ -69,6 +80,8 @@ void parse_data(string & buff,int n)
 	    track_position(data,temp);
 	    //cout << "build new node." << endl;
 	    //cout << "coordinate for new node are:" << temp->x << " " << temp->y << " " << temp->z << endl;
+	    
+	    //update information array
 	    for (int j = 0; j < 4; j++)
 	      data_buff[j] = data_buff[j + 1];
 	    data_buff[4] = to_string(temp->x) + "," + to_string(temp->y) + "," + to_string(temp->z) + "\n";
@@ -76,7 +89,7 @@ void parse_data(string & buff,int n)
 	  }
 	case ' ':
 	  {
-	    //cout <<tmp_num<<endl;
+	    //get value
 	    data[count]=stoi(tmp_num);
 	    count++;
 	    tmp_num="";
@@ -85,6 +98,7 @@ void parse_data(string & buff,int n)
 	  }
 	default:
 	  {
+	    //prevent loss of data
 	    tmp_num+=buff[i];
 	    prev_buff+=buff[i];
 	    break;
@@ -93,6 +107,8 @@ void parse_data(string & buff,int n)
     }
 }
 
+
+//calcuate position
 void track_position(int data[], node* temp)
 {
   double t=1.00/FREQ;
@@ -106,7 +122,9 @@ void track_position(int data[], node* temp)
   double delta_v[3]={((double)data[0])*t*2.00*9.81/32768.00,
 		     ((double)data[1])*t*2.00*9.81/32768.00,
 		     ((double)data[2]-32768.00/2.00)*t*2.00*9.81/32768.00};
+  //only for test
   delta_v[2]=0.0;
+  delta_v[1]=0.0;
   double inertial_delta_v[3];
   //delta velocity under world frame
   inertial_delta_v[0]=m[0][0]*delta_v[0]+m[0][1]*delta_v[1]+m[0][2]*delta_v[2];
@@ -124,10 +142,13 @@ void track_position(int data[], node* temp)
   double gx=((double)data[3])*t*250.00/32768.00/2.00;
   double gy=((double)data[4])*t*250.00/32768.00/2.00;
   double gz=((double)data[5])*t*250.00/32768.00/2.00;
+  //comment quaternion for test purpose
   /*q[0]+=-b*gx-c*gy-d*gz;
   q[1]+=a*gx+c*gz-d*gz;
   q[2]+=a*gy-b*gz+d*gx;
   q[3]+=a*gz+b*gy-c*gx;*/
+
+  //TODO: need test.
   double norm=quick_normal(q);
   /*q[0]*=norm;
   q[1]*=norm;
@@ -135,6 +156,8 @@ void track_position(int data[], node* temp)
   q[3]*=norm;*/
 }
 
+
+//Use Newton iteration to calcuate 1/sqrt(). Should be fast.
 double quick_normal(double q[])
 {
   float sum=q[0]*q[0]+q[1]*q[1]+q[2]*q[2]+q[3]*q[3];

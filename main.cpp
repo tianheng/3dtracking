@@ -25,30 +25,33 @@ int open_port()
   cfsetospeed (&tty, B115200);
   cfsetispeed (&tty, B115200);
   
-  // disable IGNBRK for mismatched speed tests; otherwise receive break
-  // as \000 chars
-  tty.c_iflag &= ~IGNBRK;         // disable break processing
-  tty.c_lflag = 0;                // no signaling chars, no echo,
-                                        // no canonical processing
-  tty.c_oflag = 0;                // no remapping, no delays
-  tty.c_cc[VMIN]  = 0;            // read doesn't block
-  tty.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
+  tty.c_iflag &= ~IGNBRK;         
+  tty.c_lflag = 0;
+                  
+  tty.c_oflag = 0; 
+  tty.c_cc[VMIN]  = 0;
+  tty.c_cc[VTIME] = 5;   
   
-  tty.c_iflag &= ~(IXON | IXOFF | IXANY); // shut off xon/xoff ctrl
+  tty.c_iflag &= ~(IXON | IXOFF | IXANY); 
   
-  tty.c_cflag |= (CLOCAL | CREAD);// ignore modem controls,
-  // enable reading
+  tty.c_cflag |= (CLOCAL | CREAD);
+  // enable reading, odd parity, 7bits. only for microcontroller. 
+  // need recode for XBee module.
   tty.c_cflag |= PARENB;
   tty.c_cflag |= PARODD;
   tty.c_cflag |= CSTOPB;
   tty.c_cflag &= ~CSIZE;
   tty.c_cflag |= CS7;
   tcsetattr(fd, TCSANOW, &tty);
+
+  //flush first 4096 bytes garbage data
   char temp_buff[4096];
   int n =read(fd, temp_buff, sizeof temp_buff);
   return fd;
 }
-//print info text to screen
+
+
+//print info text to screen, need recode for parameters. Shitty design
 void output_info(string info, int x, int y, string input_string)
 {
 	//store original matrix and then set matrix to identity
@@ -80,8 +83,10 @@ void display(void)
 	glBegin(GL_LINE_STRIP);
 		node* curr = START;
 		double x = 0.0f, y = 0.0f, z = 0.0f;
+		//iterate all points and draw points
    		while (curr != NULL)
 		{
+		  //ATTENTION. OpenGL's coordinate is different. 
 			x += curr->y;
 			y += curr->z;
 			z += curr->x;
@@ -117,19 +122,24 @@ void display(void)
 	//read usb content. 
 	char temp_buff[4096];
 	int n =read(fd, temp_buff, sizeof temp_buff);
+	//flush again. just in case.
 	if (!flag_start)
 	  {
 	    n=read(fd,temp_buff, sizeof temp_buff);
 	    flag_start=true;
 	  }
+	//use string to simplify process.
 	string buff(temp_buff);
+	//parse data and calcuate position.
 	parse_data(buff,n);
 	/*  don't wait!
 	*  start processing buffered OpenGL routines
 	*/
+	//output information on screen. 
 	output_info("Current camera position:\n", 0, 500, to_string(cx).substr(0,6) + "," + to_string(cy).substr(0,6) + "," + to_string(cz).substr(0,6));
 	output_info("Node added:\n", -900, 900, data_buff[0] + data_buff[1] + data_buff[2] + data_buff[3] + data_buff[4]);
 	output_info("Current angle:\n",-900,500, to_string(angle[0]).substr(0,5) + "," + to_string(angle[1]).substr(0,5) + "," + to_string(angle[2]).substr(0,5));
+	output_info("Current speed:\n",-900,400, to_string(v[0]).substr(0,5) + "," + to_string(v[1]).substr(0,5) + "," + to_string(v[2]).substr(0,5));
 	glutSwapBuffers();
 }
 
@@ -218,13 +228,16 @@ void runMainLoop(int val)
 */
 int main(int argc, char** argv)
 {
+  //set for random tests
 	srand(time(NULL));
 	start.x = 0.0f;
 	start.y = 0.0f;
 	start.z = 0.0f;
 	start.next = NULL;
 	tail = START;
+	//open usb port
 	fd=open_port();
+	//init OpenGL window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(1000, 1000);
